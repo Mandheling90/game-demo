@@ -12,7 +12,11 @@
   --shadow: 0 18px 50px rgba(48, 42, 31, 0.12);
   --body-bg:
     linear-gradient(135deg, rgba(35, 100, 90, 0.08), transparent 34%),
-    radial-gradient(circle at top right, rgba(185, 133, 32, 0.12), transparent 32%),
+    radial-gradient(
+      circle at top right,
+      rgba(185, 133, 32, 0.12),
+      transparent 32%
+    ),
     var(--bg);
   --panel-bg: rgba(255, 250, 241, 0.9);
   --card-bg: #ffffff;
@@ -41,7 +45,11 @@
   --shadow: 0 18px 50px rgba(0, 0, 0, 0.36);
   --body-bg:
     linear-gradient(135deg, rgba(102, 195, 173, 0.08), transparent 34%),
-    radial-gradient(circle at top right, rgba(239, 200, 108, 0.1), transparent 32%),
+    radial-gradient(
+      circle at top right,
+      rgba(239, 200, 108, 0.1),
+      transparent 32%
+    ),
     var(--bg);
   --panel-bg: rgba(23, 29, 32, 0.92);
   --card-bg: #20282c;
@@ -71,11 +79,7 @@ body {
   min-width: 0;
   background: var(--body-bg);
   color: var(--ink);
-  font-family:
-    Arial,
-    "Apple SD Gothic Neo",
-    "Malgun Gothic",
-    sans-serif;
+  font-family: Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
 }
 
 body:has(.game-shell) {
@@ -365,7 +369,10 @@ h2 {
 
 .board {
   display: grid;
-  grid-template-columns: minmax(160px, 210px) minmax(460px, 1fr) minmax(280px, 340px);
+  grid-template-columns: minmax(160px, 210px) minmax(460px, 1fr) minmax(
+      280px,
+      340px
+    );
   grid-template-rows: minmax(0, 1fr) clamp(250px, 29vh, 300px);
   grid-template-areas:
     "status center result"
@@ -408,6 +415,62 @@ h2 {
 .panel {
   min-width: 0;
   padding: 12px;
+}
+
+.collapse-section {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  height: 100%;
+}
+
+.collapse-section:not([open]) {
+  height: auto;
+}
+
+.collapse-section summary {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card-bg);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 900;
+  list-style: none;
+  user-select: none;
+}
+
+.collapse-section summary::-webkit-details-marker {
+  display: none;
+}
+
+.collapse-section summary::after {
+  content: "+";
+  display: grid;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--accent-strong);
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.collapse-section[open] summary::after {
+  content: "-";
+}
+
+.cards-panel .collapse-section,
+.log-panel .collapse-section {
+  grid-template-rows: auto auto minmax(0, 1fr);
 }
 
 .panel-heading p {
@@ -677,7 +740,10 @@ progress::-moz-progress-bar {
 
 @media (max-width: 1280px) {
   .board {
-    grid-template-columns: minmax(150px, 190px) minmax(380px, 1fr) minmax(250px, 300px);
+    grid-template-columns: minmax(150px, 190px) minmax(380px, 1fr) minmax(
+        250px,
+        300px
+      );
   }
 
   .card-grid {

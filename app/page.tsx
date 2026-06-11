@@ -233,7 +233,11 @@ const scenarios: Scenario[] = [
           truth: 1,
           text: "병자들은 살아 있었지만 손목 아래로 검은 뿌리 같은 혈관이 번져 있었다.",
         },
-        failure: { fear: 1, madness: 1, text: "치유된 몸의 내부에서 낯선 것이 꿈틀거렸다." },
+        failure: {
+          fear: 1,
+          madness: 1,
+          text: "치유된 몸의 내부에서 낯선 것이 꿈틀거렸다.",
+        },
       },
       {
         id: "shrine",
@@ -265,7 +269,10 @@ const scenarios: Scenario[] = [
           clues: ["죽지 않은 실종자"],
           text: "무덤 속 흔적은 죽음이 아니라 은폐를 가리켰다.",
         },
-        failure: { fear: 1, text: "이름 없는 무덤들이 밤새 당신을 따라오는 듯하다." },
+        failure: {
+          fear: 1,
+          text: "이름 없는 무덤들이 밤새 당신을 따라오는 듯하다.",
+        },
       },
       {
         id: "white-woods",
@@ -278,7 +285,11 @@ const scenarios: Scenario[] = [
           truth: 2,
           text: "실종자들은 살아 있었다. 다만 누구도 집으로 돌아가고 싶어 하지 않았다.",
         },
-        failure: { injury: 1, fear: 1, text: "흰 나무의 뿌리가 발목을 파고들었다." },
+        failure: {
+          injury: 1,
+          fear: 1,
+          text: "흰 나무의 뿌리가 발목을 파고들었다.",
+        },
       },
       {
         id: "saint-tracks",
@@ -327,7 +338,12 @@ const scenarios: Scenario[] = [
       "인형 안의 이름표": ["이름", "금기"],
       "살아 있는 옷감": ["괴이", "의식"],
     },
-    endings: ["재단사 토벌", "이름 되돌리기", "마을의 공모 폭로", "대체 계약 체결"],
+    endings: [
+      "재단사 토벌",
+      "이름 되돌리기",
+      "마을의 공모 폭로",
+      "대체 계약 체결",
+    ],
     slots: [
       {
         id: "missing-room",
@@ -339,7 +355,10 @@ const scenarios: Scenario[] = [
           truth: 1,
           text: "피는 없고 창문은 잠겨 있었다. 탁자 위엔 붉은 장갑만 남았다.",
         },
-        deepSuccess: { clues: ["두 사람의 발자국"], text: "실종자는 혼자가 아니었다." },
+        deepSuccess: {
+          clues: ["두 사람의 발자국"],
+          text: "실종자는 혼자가 아니었다.",
+        },
         failure: { fear: 1, text: "닫힌 방 안에서 누군가의 숨소리를 들었다." },
       },
       {
@@ -382,7 +401,10 @@ const scenarios: Scenario[] = [
           clues: ["지워진 이름들"],
           text: "잉크가 마르지 않은 이름들이 호적에서 사라지고 있었다.",
         },
-        failure: { status: ["먼지 속의 속삭임"], text: "먼지 속에서 지워진 이름들이 속삭였다." },
+        failure: {
+          status: ["먼지 속의 속삭임"],
+          text: "먼지 속에서 지워진 이름들이 속삭였다.",
+        },
       },
       {
         id: "alley",
@@ -458,7 +480,12 @@ const scenarios: Scenario[] = [
       "닫힌 선실의 아이들": ["죄", "죽음"],
       "바다 밑 계약": ["계약", "금기"],
     },
-    endings: ["바다 괴이 토벌", "원혼 진혼", "선주의 죄 폭로", "바다 밑 계약 파기"],
+    endings: [
+      "바다 괴이 토벌",
+      "원혼 진혼",
+      "선주의 죄 폭로",
+      "바다 밑 계약 파기",
+    ],
     slots: [
       {
         id: "lighthouse",
@@ -502,7 +529,10 @@ const scenarios: Scenario[] = [
           clues: ["젖지 않은 발자국"],
           text: "모래는 젖어 있었지만 발자국만은 말라 있었다.",
         },
-        deepSuccess: { unlocks: ["ebb-road"], text: "썰물 때만 드러나는 길을 발견했다." },
+        deepSuccess: {
+          unlocks: ["ebb-road"],
+          text: "썰물 때만 드러나는 길을 발견했다.",
+        },
         failure: { fear: 1, text: "발자국이 당신의 뒤에서 하나 더 생겼다." },
       },
       {
@@ -562,7 +592,10 @@ const scenarios: Scenario[] = [
           madness: 2,
           text: "바다와 맺어진 계약이 종 안쪽에 새겨져 있었다.",
         },
-        failure: { status: ["폐에 찬 바닷물"], text: "숨을 쉴 때마다 짠물이 올라왔다." },
+        failure: {
+          status: ["폐에 찬 바닷물"],
+          text: "숨을 쉴 때마다 짠물이 올라왔다.",
+        },
       },
     ],
   },
@@ -614,11 +647,19 @@ function sumTags(selectedCards: ActionCard[]) {
   );
 }
 
-function optionMatched(total: Record<StatKey, number>, option: RequirementOption) {
-  return Object.entries(option).every(([tag, value]) => total[tag as StatKey] >= value);
+function optionMatched(
+  total: Record<StatKey, number>,
+  option: RequirementOption,
+) {
+  return Object.entries(option).every(
+    ([tag, value]) => total[tag as StatKey] >= value,
+  );
 }
 
-function requirementScore(total: Record<StatKey, number>, option: RequirementOption) {
+function requirementScore(
+  total: Record<StatKey, number>,
+  option: RequirementOption,
+) {
   return Object.entries(option).reduce(
     (score, [tag, value]) => score + Math.min(total[tag as StatKey], value),
     0,
@@ -629,7 +670,10 @@ function requirementTotal(option: RequirementOption) {
   return Object.values(option).reduce((score, value) => score + value, 0);
 }
 
-function bestRequirement(slot: InvestigationSlot, total: Record<StatKey, number>) {
+function bestRequirement(
+  slot: InvestigationSlot,
+  total: Record<StatKey, number>,
+) {
   return slot.requirements
     .map((option) => ({
       option,
@@ -637,10 +681,15 @@ function bestRequirement(slot: InvestigationSlot, total: Record<StatKey, number>
       score: requirementScore(total, option),
       required: requirementTotal(option),
     }))
-    .sort((a, b) => Number(b.matched) - Number(a.matched) || b.score - a.score)[0];
+    .sort(
+      (a, b) => Number(b.matched) - Number(a.matched) || b.score - a.score,
+    )[0];
 }
 
-function judge(total: Record<StatKey, number>, slot: InvestigationSlot): Result {
+function judge(
+  total: Record<StatKey, number>,
+  slot: InvestigationSlot,
+): Result {
   const best = bestRequirement(slot, total);
   if (!best?.matched) {
     return "실패";
@@ -660,7 +709,11 @@ function formatRequirement(option: RequirementOption) {
     .join(" + ");
 }
 
-function isSlotUnlocked(slot: InvestigationSlot, scenario: Scenario, state: GameState) {
+function isSlotUnlocked(
+  slot: InvestigationSlot,
+  scenario: Scenario,
+  state: GameState,
+) {
   if (slot.kind === "initial") {
     return true;
   }
@@ -675,14 +728,18 @@ function isSlotUnlocked(slot: InvestigationSlot, scenario: Scenario, state: Game
   if (slot.id === "saint-tracks") {
     return (
       state.madness >= 5 ||
-      (state.clues.includes("사슴뿔이 새겨진 제단") && state.clues.includes("나은 병자의 검은 혈관"))
+      (state.clues.includes("사슴뿔이 새겨진 제단") &&
+        state.clues.includes("나은 병자의 검은 혈관"))
     );
   }
   if (slot.id === "doll-pile") {
     return state.clues.includes("잘린 실밥");
   }
   if (slot.id === "night-sewing") {
-    return state.clues.includes("붉은 장갑") && state.clues.includes("맞지 않는 치수");
+    return (
+      state.clues.includes("붉은 장갑") &&
+      state.clues.includes("맞지 않는 치수")
+    );
   }
   if (slot.id === "ebb-road") {
     return state.clues.includes("젖지 않은 발자국");
@@ -694,18 +751,24 @@ function isSlotUnlocked(slot: InvestigationSlot, scenario: Scenario, state: Game
     );
   }
 
-  return scenario.slots.some((candidate) => state.unlockedSlotIds.includes(candidate.id));
+  return scenario.slots.some((candidate) =>
+    state.unlockedSlotIds.includes(candidate.id),
+  );
 }
 
 function outcomeText(outcome: SlotOutcome) {
   const parts = [];
-  if (outcome.clues?.length) parts.push(`단서 ${outcome.clues.map((clue) => `[${clue}]`).join(", ")}`);
+  if (outcome.clues?.length)
+    parts.push(`단서 ${outcome.clues.map((clue) => `[${clue}]`).join(", ")}`);
   if (outcome.truth) parts.push(`진실 +${outcome.truth}`);
   if (outcome.danger) parts.push(`위험 +${outcome.danger}`);
   if (outcome.fear) parts.push(`공포 +${outcome.fear}`);
   if (outcome.madness) parts.push(`광기 +${outcome.madness}`);
   if (outcome.injury) parts.push(`부상 +${outcome.injury}`);
-  if (outcome.status?.length) parts.push(`상태 ${outcome.status.map((status) => `[${status}]`).join(", ")}`);
+  if (outcome.status?.length)
+    parts.push(
+      `상태 ${outcome.status.map((status) => `[${status}]`).join(", ")}`,
+    );
   if (outcome.unlocks?.length) parts.push("새 조사 슬롯 개방");
 
   return parts.length ? `${outcome.text} / ${parts.join(", ")}` : outcome.text;
@@ -715,16 +778,25 @@ export default function Home() {
   const [theme, setTheme] = useState<Theme>("light");
   const [game, setGame] = useState<GameState>(defaultState);
 
-  const scenario = scenarios.find((item) => item.id === game.scenarioId) ?? scenarios[0];
+  const scenario =
+    scenarios.find((item) => item.id === game.scenarioId) ?? scenarios[0];
   const currentTime = times[game.timeIndex];
   const availableSlots = scenario.slots.filter(
-    (slot) => isSlotUnlocked(slot, scenario, game) && (!slot.timeOnly || slot.timeOnly === currentTime.key),
+    (slot) =>
+      isSlotUnlocked(slot, scenario, game) &&
+      (!slot.timeOnly || slot.timeOnly === currentTime.key),
   );
   const selectedSlot =
-    availableSlots.find((slot) => slot.id === game.selectedSlotId) ?? availableSlots[0];
-  const selectedCards = actionCards.filter((card) => game.selectedCardIds.includes(card.id));
+    availableSlots.find((slot) => slot.id === game.selectedSlotId) ??
+    availableSlots[0];
+  const selectedCards = actionCards.filter((card) =>
+    game.selectedCardIds.includes(card.id),
+  );
   const totals = useMemo(() => sumTags(selectedCards), [selectedCards]);
-  const expectedResult = selectedCards.length > 0 && selectedSlot ? judge(totals, selectedSlot) : null;
+  const expectedResult =
+    selectedCards.length > 0 && selectedSlot
+      ? judge(totals, selectedSlot)
+      : null;
   const nextThemeLabel = theme === "light" ? "다크 모드" : "라이트 모드";
 
   const toggleTheme = () => {
@@ -751,7 +823,11 @@ export default function Home() {
   };
 
   const selectSlot = (slotId: string) => {
-    setGame((current) => ({ ...current, selectedSlotId: slotId, selectedCardIds: [] }));
+    setGame((current) => ({
+      ...current,
+      selectedSlotId: slotId,
+      selectedCardIds: [],
+    }));
   };
 
   const toggleCard = (cardId: string) => {
@@ -759,7 +835,9 @@ export default function Home() {
       if (current.selectedCardIds.includes(cardId)) {
         return {
           ...current,
-          selectedCardIds: current.selectedCardIds.filter((id) => id !== cardId),
+          selectedCardIds: current.selectedCardIds.filter(
+            (id) => id !== cardId,
+          ),
         };
       }
 
@@ -767,11 +845,17 @@ export default function Home() {
         return current;
       }
 
-      return { ...current, selectedCardIds: [...current.selectedCardIds, cardId] };
+      return {
+        ...current,
+        selectedCardIds: [...current.selectedCardIds, cardId],
+      };
     });
   };
 
-  const advanceTime = (state: GameState, activeScenario: Scenario): GameState => {
+  const advanceTime = (
+    state: GameState,
+    activeScenario: Scenario,
+  ): GameState => {
     const nextTimeIndex = state.timeIndex + 1;
 
     if (nextTimeIndex < times.length) {
@@ -819,9 +903,13 @@ export default function Home() {
     }
 
     const result = judge(totals, selectedSlot);
-    const baseOutcome = result === "실패" ? selectedSlot.failure : selectedSlot.success;
-    const deepOutcome = result === "깊은 성공" ? selectedSlot.deepSuccess : undefined;
-    const outcomes = [baseOutcome, deepOutcome].filter(Boolean) as SlotOutcome[];
+    const baseOutcome =
+      result === "실패" ? selectedSlot.failure : selectedSlot.success;
+    const deepOutcome =
+      result === "깊은 성공" ? selectedSlot.deepSuccess : undefined;
+    const outcomes = [baseOutcome, deepOutcome].filter(
+      Boolean,
+    ) as SlotOutcome[];
 
     setGame((current) => {
       const nextActions = current.actionsLeft - 1;
@@ -855,7 +943,9 @@ export default function Home() {
         ],
       };
 
-      return nextActions <= 0 ? advanceTime(nextState, scenario) : advanceTime(nextState, scenario);
+      return nextActions <= 0
+        ? advanceTime(nextState, scenario)
+        : advanceTime(nextState, scenario);
     });
   };
 
@@ -868,25 +958,39 @@ export default function Home() {
   if (!game.introAccepted) {
     return (
       <main className="intro-shell" data-theme={theme}>
-        <button className="theme-toggle intro-theme-toggle" onClick={toggleTheme} type="button">
+        <button
+          className="theme-toggle intro-theme-toggle"
+          onClick={toggleTheme}
+          type="button"
+        >
           {nextThemeLabel}
         </button>
-        <section className="intro-scene scenario-intro" aria-label="시나리오 선택">
+        <section
+          className="intro-scene scenario-intro"
+          aria-label="시나리오 선택"
+        >
           <div className="intro-copy">
             <p className="eyebrow">Case Select</p>
             <h1>의뢰 선택</h1>
             <p className="intro-lead">
-              `시나리오.txt`의 샘플 의뢰를 선택해 조사를 시작합니다. 각 사건은 서로 다른 단서,
-              조건부 조사 슬롯, 최종 해결 방향을 가집니다.
+              `시나리오.txt`의 샘플 의뢰를 선택해 조사를 시작합니다. 각 사건은
+              서로 다른 단서, 조건부 조사 슬롯, 최종 해결 방향을 가집니다.
             </p>
           </div>
           <div className="scenario-list">
             {scenarios.map((item) => (
-              <button className="scenario-card" key={item.id} onClick={() => startScenario(item)} type="button">
+              <button
+                className="scenario-card"
+                key={item.id}
+                onClick={() => startScenario(item)}
+                type="button"
+              >
                 <span>{item.sample}</span>
                 <strong>{item.title}</strong>
                 <p>{item.summary}</p>
-                <small>제한일 {item.limitDays}일 · {item.themes.join(" / ")}</small>
+                <small>
+                  제한일 {item.limitDays}일 · {item.themes.join(" / ")}
+                </small>
               </button>
             ))}
           </div>
@@ -899,169 +1003,219 @@ export default function Home() {
     <main className="game-shell" data-theme={theme}>
       <section className="board">
         <aside className="panel status-panel" aria-label="진행 상태">
-          <button className="theme-toggle" onClick={toggleTheme} type="button">
-            {nextThemeLabel}
-          </button>
-          <div className="status-grid">
-            <div>
-              <span>사건</span>
-              <strong>{scenario.title}</strong>
+          <details className="collapse-section" open>
+            <summary>진행 상태</summary>
+            <button
+              className="theme-toggle"
+              onClick={toggleTheme}
+              type="button"
+            >
+              {nextThemeLabel}
+            </button>
+            <div className="status-grid">
+              <div>
+                <span>사건</span>
+                <strong>{scenario.title}</strong>
+              </div>
+              <div>
+                <span>일차</span>
+                <strong>
+                  {game.day}/{scenario.limitDays}
+                </strong>
+              </div>
+              <div>
+                <span>시간대</span>
+                <strong>{currentTime.label}</strong>
+              </div>
+              <div>
+                <span>행동력</span>
+                <strong>{game.actionsLeft}/3</strong>
+              </div>
+              <div>
+                <span>진실</span>
+                <strong>{game.truth}</strong>
+              </div>
+              <div>
+                <span>위험 / 공포</span>
+                <strong>
+                  {game.danger} / {game.fear}
+                </strong>
+              </div>
+              <div>
+                <span>광기 / 부상</span>
+                <strong>
+                  {game.madness} / {game.injury}
+                </strong>
+              </div>
             </div>
-            <div>
-              <span>일차</span>
-              <strong>{game.day}/{scenario.limitDays}</strong>
-            </div>
-            <div>
-              <span>시간대</span>
-              <strong>{currentTime.label}</strong>
-            </div>
-            <div>
-              <span>행동력</span>
-              <strong>{game.actionsLeft}/3</strong>
-            </div>
-            <div>
-              <span>진실</span>
-              <strong>{game.truth}</strong>
-            </div>
-            <div>
-              <span>위험 / 공포</span>
-              <strong>{game.danger} / {game.fear}</strong>
-            </div>
-            <div>
-              <span>광기 / 부상</span>
-              <strong>{game.madness} / {game.injury}</strong>
-            </div>
-          </div>
+          </details>
         </aside>
 
         <div className="center-panel">
           <div className="panel slots-panel">
-            <div className="panel-heading">
-              <h2>조사 슬롯</h2>
-              <p>{scenario.finalOpenCondition} · {finalReady ? "최종 해결 검토 가능" : "조사를 계속하세요"}</p>
-            </div>
-            <div className="slot-list">
-              {availableSlots.map((slot) => (
-                <button
-                  className={`slot-card ${selectedSlot?.id === slot.id ? "selected" : ""}`}
-                  key={slot.id}
-                  onClick={() => selectSlot(slot.id)}
-                  type="button"
-                >
-                  <span className="risk">{slot.kind === "initial" ? "초기" : "조건부"}</span>
-                  <strong>{slot.name}</strong>
-                  <small>{slot.condition ?? "처음부터 조사 가능"}</small>
-                  <div className="requirement-row">
-                    {slot.requirements.map((option, index) => (
-                      <span key={`${slot.id}-${index}`}>{formatRequirement(option)}</span>
-                    ))}
-                  </div>
-                </button>
-              ))}
-            </div>
+            <details className="collapse-section" open>
+              <summary>조사 장소</summary>
+              <div className="panel-heading">
+                <h2>조사 슬롯</h2>
+                <p>
+                  {scenario.finalOpenCondition} ·{" "}
+                  {finalReady ? "최종 해결 검토 가능" : "조사를 계속하세요"}
+                </p>
+              </div>
+              <div className="slot-list">
+                {availableSlots.map((slot) => (
+                  <button
+                    className={`slot-card ${selectedSlot?.id === slot.id ? "selected" : ""}`}
+                    key={slot.id}
+                    onClick={() => selectSlot(slot.id)}
+                    type="button"
+                  >
+                    <span className="risk">
+                      {slot.kind === "initial" ? "초기" : "조건부"}
+                    </span>
+                    <strong>{slot.name}</strong>
+                    <small>{slot.condition ?? "처음부터 조사 가능"}</small>
+                    <div className="requirement-row">
+                      {slot.requirements.map((option, index) => (
+                        <span key={`${slot.id}-${index}`}>
+                          {formatRequirement(option)}
+                        </span>
+                      ))}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </details>
           </div>
 
           <section className="panel log-panel">
-            <div className="panel-heading">
-              <h2>진행 기록</h2>
-              <p>{scenario.request}</p>
-            </div>
-            <div className="log-list">
-              {game.logs.map((log) => (
-                <article className="log-entry" key={log.id}>
-                  <span>
-                    Day {log.day} · {log.time}
-                  </span>
-                  <p>{log.text}</p>
-                </article>
-              ))}
-            </div>
+            <details className="collapse-section" open>
+              <summary>진행 기록</summary>
+              <div className="panel-heading">
+                <h2>진행 기록</h2>
+                <p>{scenario.request}</p>
+              </div>
+              <div className="log-list">
+                {game.logs.map((log) => (
+                  <article className="log-entry" key={log.id}>
+                    <span>
+                      Day {log.day} · {log.time}
+                    </span>
+                    <p>{log.text}</p>
+                  </article>
+                ))}
+              </div>
+            </details>
           </section>
         </div>
 
         <div className="panel cards-panel">
-          <div className="panel-heading">
-            <h2>행동 카드</h2>
-            <p>최대 3장을 골라 슬롯의 요구 태그를 만족시킵니다.</p>
-          </div>
-          <div className="card-grid">
-            {actionCards.map((card) => {
-              const selected = game.selectedCardIds.includes(card.id);
-              return (
-                <button
-                  className={`action-card ${selected ? "selected" : ""}`}
-                  key={card.id}
-                  onClick={() => toggleCard(card.id)}
-                  type="button"
-                >
-                  <span className="card-cost">행동</span>
-                  <strong>{card.name}</strong>
-                  <p>{card.description}</p>
-                  <div className="tag-row">
-                    {statKeys.map((tag) =>
-                      card.tags[tag] ? (
-                        <span key={tag}>
-                          {tag} +{card.tags[tag]}
-                        </span>
-                      ) : null,
-                    )}
-                  </div>
-                </button>
-              );
-            })}
-          </div>
+          <details className="collapse-section" open>
+            <summary>행동 카드</summary>
+            <div className="panel-heading">
+              <h2>행동 카드</h2>
+              <p>최대 3장을 골라 슬롯의 요구 태그를 만족시킵니다.</p>
+            </div>
+            <div className="card-grid">
+              {actionCards.map((card) => {
+                const selected = game.selectedCardIds.includes(card.id);
+                return (
+                  <button
+                    className={`action-card ${selected ? "selected" : ""}`}
+                    key={card.id}
+                    onClick={() => toggleCard(card.id)}
+                    type="button"
+                  >
+                    <span className="card-cost">행동</span>
+                    <strong>{card.name}</strong>
+                    <p>{card.description}</p>
+                    <div className="tag-row">
+                      {statKeys.map((tag) =>
+                        card.tags[tag] ? (
+                          <span key={tag}>
+                            {tag} +{card.tags[tag]}
+                          </span>
+                        ) : null,
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </details>
         </div>
 
         <aside className="panel result-panel">
-          <div className="panel-heading">
-            <h2>판정</h2>
-            <p>{selectedSlot ? selectedSlot.name : "조사 슬롯을 선택하세요"}</p>
-          </div>
+          <details className="collapse-section" open>
+            <summary>판정</summary>
+            <div className="panel-heading">
+              <h2>판정</h2>
+              <p>
+                {selectedSlot ? selectedSlot.name : "조사 슬롯을 선택하세요"}
+              </p>
+            </div>
 
-          {selectedSlot ? (
-            <>
-              <div className="comparison">
-                {selectedSlot.requirements.map((option, index) => (
-                  <div className="meter" key={`${selectedSlot.id}-meter-${index}`}>
-                    <div>
-                      <span>{formatRequirement(option)}</span>
-                      <strong>{optionMatched(totals, option) ? "충족" : "부족"}</strong>
+            {selectedSlot ? (
+              <>
+                <div className="comparison">
+                  {selectedSlot.requirements.map((option, index) => (
+                    <div
+                      className="meter"
+                      key={`${selectedSlot.id}-meter-${index}`}
+                    >
+                      <div>
+                        <span>{formatRequirement(option)}</span>
+                        <strong>
+                          {optionMatched(totals, option) ? "충족" : "부족"}
+                        </strong>
+                      </div>
+                      <progress
+                        max={Math.max(requirementTotal(option), 1)}
+                        value={Math.min(
+                          requirementScore(totals, option),
+                          requirementTotal(option),
+                        )}
+                      />
                     </div>
-                    <progress
-                      max={Math.max(requirementTotal(option), 1)}
-                      value={Math.min(requirementScore(totals, option), requirementTotal(option))}
-                    />
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
 
-              <div className={`result-box ${expectedResult ? "active" : ""}`}>
-                <span>예상 결과</span>
-                <strong>{expectedResult ?? "카드를 선택하세요"}</strong>
-                <p>
-                  깊은 성공은 요구치 충족 후 선택 카드의 총 태그 수치가 요구치보다 2 이상 높을 때
-                  발생합니다.
-                </p>
-              </div>
-            </>
-          ) : null}
+                <div className={`result-box ${expectedResult ? "active" : ""}`}>
+                  <span>예상 결과</span>
+                  <strong>{expectedResult ?? "카드를 선택하세요"}</strong>
+                  <p>
+                    깊은 성공은 요구치 충족 후 선택 카드의 총 태그 수치가
+                    요구치보다 2 이상 높을 때 발생합니다.
+                  </p>
+                </div>
+              </>
+            ) : null}
 
-          <div className="clue-box">
-            <span>보유 단서</span>
-            <p>{game.clues.length ? game.clues.map((clue) => `[${clue}]`).join(" ") : "아직 없음"}</p>
-          </div>
+            <div className="clue-box">
+              <span>보유 단서</span>
+              <p>
+                {game.clues.length
+                  ? game.clues.map((clue) => `[${clue}]`).join(" ")
+                  : "아직 없음"}
+              </p>
+            </div>
 
-          <button
-            className="submit-button"
-            disabled={!selectedSlot || selectedCards.length === 0 || game.actionsLeft <= 0}
-            onClick={submitInvestigation}
-            type="button"
-          >
-            조사 제출
-          </button>
-          <button className="ghost-button" onClick={resetGame} type="button">
-            의뢰 다시 선택
-          </button>
+            <button
+              className="submit-button"
+              disabled={
+                !selectedSlot ||
+                selectedCards.length === 0 ||
+                game.actionsLeft <= 0
+              }
+              onClick={submitInvestigation}
+              type="button"
+            >
+              조사 제출
+            </button>
+            <button className="ghost-button" onClick={resetGame} type="button">
+              의뢰 다시 선택
+            </button>
+          </details>
         </aside>
       </section>
     </main>
