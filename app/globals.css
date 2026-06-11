@@ -351,6 +351,20 @@ h2 {
   line-height: 1.2;
 }
 
+.status-case-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.status-theme-toggle {
+  min-height: 30px;
+  flex: 0 0 auto;
+  padding: 0 9px;
+  font-size: 0.72rem;
+}
+
 .status-grid span,
 .result-box span,
 .log-entry span {
@@ -980,6 +994,10 @@ progress::-moz-progress-bar {
 
   .theme-toggle {
     width: 100%;
+  }
+
+  .status-theme-toggle {
+    width: auto;
   }
 
   .action-card {

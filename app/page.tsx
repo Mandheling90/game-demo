@@ -1005,16 +1005,18 @@ export default function Home() {
         <aside className="panel status-panel" aria-label="진행 상태">
           <details className="collapse-section" open>
             <summary>진행 상태</summary>
-            <button
-              className="theme-toggle"
-              onClick={toggleTheme}
-              type="button"
-            >
-              {nextThemeLabel}
-            </button>
             <div className="status-grid">
-              <div>
-                <span>사건</span>
+              <div className="status-case-card">
+                <div className="status-case-head">
+                  <span>사건</span>
+                  <button
+                    className="theme-toggle status-theme-toggle"
+                    onClick={toggleTheme}
+                    type="button"
+                  >
+                    {nextThemeLabel}
+                  </button>
+                </div>
                 <strong>{scenario.title}</strong>
               </div>
               <div>
