@@ -821,13 +821,22 @@ progress::-moz-progress-bar {
   }
 
   .card-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 2px 2px 10px;
+    scroll-padding: 2px;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
   }
 
   .action-card {
+    flex: 0 0 min(78vw, 290px);
     height: auto;
     min-height: auto;
     overflow: visible;
+    scroll-snap-align: start;
   }
 
   .top-bar,
@@ -895,9 +904,12 @@ progress::-moz-progress-bar {
     gap: 8px;
   }
 
-  .status-grid,
-  .card-grid {
+  .status-grid {
     grid-template-columns: 1fr;
+  }
+
+  .card-grid {
+    display: flex;
   }
 
   .theme-toggle {
