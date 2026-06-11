@@ -60,6 +60,12 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   min-width: 0;
@@ -323,6 +329,7 @@ h2 {
   display: grid;
   align-content: start;
   gap: 10px;
+  min-width: 0;
   min-height: 0;
 }
 
@@ -377,6 +384,7 @@ h2 {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   gap: 12px;
+  min-width: 0;
   min-height: 0;
 }
 
@@ -385,17 +393,20 @@ h2 {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
   gap: 10px;
+  min-width: 0;
   min-height: 0;
   overflow: hidden;
 }
 
 .result-panel {
   grid-area: result;
+  min-width: 0;
   min-height: 0;
   overflow: auto;
 }
 
 .panel {
+  min-width: 0;
   padding: 12px;
 }
 
@@ -781,11 +792,14 @@ progress::-moz-progress-bar {
 
   .board {
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto auto auto;
     grid-template-areas:
       "status"
       "center"
-      "cards";
+      "cards"
+      "result";
+    align-items: start;
+    gap: 10px;
   }
 
   .center-panel {
@@ -807,11 +821,13 @@ progress::-moz-progress-bar {
   }
 
   .card-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
 
   .action-card {
-    min-height: 164px;
+    height: auto;
+    min-height: auto;
+    overflow: visible;
   }
 
   .top-bar,
@@ -840,6 +856,11 @@ progress::-moz-progress-bar {
     padding: 10px;
   }
 
+  .slot-card:hover,
+  .action-card:hover {
+    transform: none;
+  }
+
   .tag-row,
   .requirement-row {
     gap: 4px;
@@ -853,6 +874,8 @@ progress::-moz-progress-bar {
   }
 
   .result-panel {
+    display: block;
+    grid-area: result;
     max-height: none;
     overflow: visible;
   }
